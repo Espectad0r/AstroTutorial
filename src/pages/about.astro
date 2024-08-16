@@ -1,19 +1,50 @@
+---
+const pageTitle = "About me";
+const identity = {
+    firstname: "Nicolas",
+    country: "Colombia",
+    occupation: "Game dev",
+    hobbies: ["writing", "play videogames", "read"],
+};
+const skills = ["Blender", "Photoshop", "Substance 3D Painter", "Unity Engine"];
+const happy = true;
+const finished = false;
+const goal = 3;
+---
+
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>nav3dart</title>
-	</head>
-	<body>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{pageTitle}</title>
+    </head>
+    <body>
         <a href="/">Home</a>
         <a href="/about/">About me</a>
         <a href="/portfolio/">Portfolio</a>
-		<h1>About me</h1>
-        <h2>Nicolas Aguirre Valencia</h2>
-        <p>3D artist</p>
-        <p>Game dev</p>
-        <p>Snowy Games co-founder</p>
-	</body>
+        <h1>{pageTitle}</h1>
+        <ul>
+            <li>My name is {identity.firstname}.</li>
+            <li>
+                I'm from {identity.country} and i work as {identity.occupation}.
+            </li>
+            {
+                identity.hobbies.length >= 2 && (
+                    <li>
+                        Two of my hobbies are {identity.hobbies[0]} and{" "}
+                        {identity.hobbies[1]}
+                    </li>
+                )
+            }
+        </ul>
+        <p>My skills:</p>
+        <ul>
+            {skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+        {happy && <p>¡I'm happy!</p>}
+        {finished && <p>I've finished this tutorial</p>}
+        {goal == 3 ? <p>My objective is to finish in 3 days</p> : <p>My objective aren't 3 days</p>}
+    </body>
 </html>

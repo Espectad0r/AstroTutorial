@@ -1,9 +1,7 @@
 ---
-import '../styles/global.css';
-import Navigation from '../components/Navigation.astro';
-import Footer from '../components/Footer.astro';
-
+import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "About me";
+
 const identity = {
     firstname: "Nicolas",
     country: "Colombia",
@@ -12,64 +10,35 @@ const identity = {
 };
 const skills = ["Blender", "Photoshop", "Substance 3D Painter", "Unity Engine"];
 
-const happy = true;
-const finished = false;
-const goal = 3;
-
 const skillColor = "navy";
 const fontWeight = "bold";
 const textTransform = "uppercase";
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
-
-        <style define:vars={{skillColor, fontWeight, textTransform}}>
-    
-            .skill {
-                color: var(--skillColor);
-                font-weight: var(--fontWeight);
-                text-transform: var(--textTransform);
-
-            }
-        </style>
-
-    </head>
-    <body>
-        <Navigation />
-        <h1>{pageTitle}</h1>
-        <ul>
-            <li>My name is {identity.firstname}.</li>
-            <li>
-                I'm from {identity.country} and i work as {identity.occupation}.
-            </li>
-            {
-                identity.hobbies.length >= 2 && (
-                    <li>
-                        Two of my hobbies are {identity.hobbies[0]} and{" "}
-                        {identity.hobbies[1]}
-                    </li>
-                )
-            }
-        </ul>
-        <p>My skills:</p>
-        <ul>
-            {skills.map((skill) => <li class="skill">{skill}</li>)}
-        </ul>
-        {happy && <p>¡I'm happy!</p>}
-        {finished && <p>I've finished this tutorial</p>}
+<BaseLayout pageTitle={pageTitle}>
+    <style define:vars={{ skillColor, fontWeight, textTransform }}>
+        .skill {
+            color: var(--skillColor);
+            font-weight: var(--fontWeight);
+            text-transform: var(--textTransform);
+        }
+    </style>
+    <ul>
+        <li>My name is {identity.firstname}.</li>
+        <li>
+            I'm from {identity.country} and i work as {identity.occupation}.
+        </li>
         {
-            goal == 3 ? (
-                <p>My objective is to finish in 3 days</p>
-            ) : (
-                <p>My objective aren't 3 days</p>
+            identity.hobbies.length >= 2 && (
+                <li>
+                    Two of my hobbies are {identity.hobbies[0]} and{" "}
+                    {identity.hobbies[1]}
+                </li>
             )
         }
-        <Footer />
-    </body>
-</html>
+    </ul>
+    <p>My skills:</p>
+    <ul>
+        {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+</BaseLayout>
